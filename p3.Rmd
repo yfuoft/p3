@@ -1,7 +1,8 @@
 ---
 title: "Characteristics of an American Ideologue: A Linear Relationship"
 author: "Yousuf Farhan"
-date: "3/20/2022"
+date: "1/20/2022"
+bibliography: references.bib 
 output: pdf_document
 ---
 
@@ -9,40 +10,41 @@ output: pdf_document
 knitr::opts_chunk$set(echo = TRUE)
 library(haven)
 library(tidyverse)
-raw_data <- read_dta("inputs/data/gss2021.dta")
 ```
 
 ```{=tex}
 \begin{centering}
 {\bf Abstract}
 \\
-The American General Social Survey 2021 sheds light on various societal benchmarks. This paper extrapolates on this data and demonstrates that an almost linear model can be formed between age, family income, level of educational attainment, political party affiliations and political views, providing a more focused yet holistic view on American political opinion. This nigh-linear relationship is sufficiently accurate to make predictions about how individuals with certain characteristics are likely to vote.
+The American General Social Survey 2021 sheds light on various societal benchmarks. This paper extrapolates on this data and demonstrates that anything close to a linear model cannot be formed between age, family income, level of educational attainment, political party affiliations and political views, providing a more focused yet holistic view on American political opinion. Some academic literature has established that a nigh-linear relationship is sufficiently accurate to make predictions about how individuals with certain characteristics are likely to vote. This paper uses this data to demonstrate otherwise, refuting this notion as nothing more than a stereotype.
 \end{centering}
 ```
-## Introduction
+# Introduction
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+The R language [@R-base] is used, in addition to a variety of packages and scholarly sources. Please refer to the References section or the "references.bib" file in the Git repository for more information.
+The relationship between economic and social classes with political views and party leanings has drawn the attention of many academics, statisticians and political scientists and commentators. Many have tried to claim that a linear relationship between the factors that define economic and social classes and political leanings and views exists (Dupont & Bateman, 2012; Burris, 1987). This paper will refute this, and leave the reason for why statistical data would be weaponized in this manner up to speculation. As statisticians, trends are important. However creating trends that do not exist or trends that are intentionally based off of unauthentic data is very concerning.
 
-```{r cars}
-relevant_data <-
-  raw_data %>%
-    select(
-      age,
-      income,
-      partyid,
-      polviews
-    )
-    
+
+
+# Data
+
+
+## How it was obtained
+
+The entirety of the data used as input in this paper was obtained through the American General Social Survey 2021. The data is free to use for academic purposes.
+## Cleaning the data
+
+## Results
+
+# References
+
+```{r, echo=FALSE, warning=FALSE}
+df2 <- "references.bib" %>%
+  RefManageR::ReadBib() 
+df2
 ```
 
-## Including Plots
+# Links
 
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+Github: "<https://github.com/yfuoft/p3.git>"
