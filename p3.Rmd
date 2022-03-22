@@ -217,8 +217,9 @@ The primary strength of the General Social Survey 2021 is the sheer amount of va
 
 ### Shortcomings
 
+Assigning numeric values to categorical data is very poorly done. There is a severe lack of consistency when a value is being determined to represent neutrality or strong opinions or affiliations towards one side. For instance, complete neutrality for political party affiliations is represent by an integer value of 3, but for political views by an integer value of 4. This makes it harder to perform cumulative computations. A vastly superior approach would be assigning a completely neutral stance a value of 0. This would have made the data very easy to analyze and perform complex computations on. Then, the distance from this value can be used to compute the numbers and intensity of deviations from it. Due to this, multiple linear regression could be only at a very elementary level, as many more levels of data preperation would be required.
 
-
+## What makes this paper
 # Bibliography
 
 ```{r, echo=FALSE, warning=FALSE}
