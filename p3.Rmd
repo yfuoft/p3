@@ -35,10 +35,18 @@ The relationship between economic and social classes with political views and pa
 The entirety of the data used as input in this paper was obtained through the American General Social Survey 2021. The data is free to use for academic purposes. It was saved as a Stata file in the data subdirectory of the inputs folder, along with ancillary documents regarding how to read it.
 ## Cleaning the data
 
-The data file consists of five-hundred and sixty-five columns. This paper uses four of these to account for the age, family income, political party affiliation and politican views variables. The data political party affiliation exists on a spectrum, with values ranging from 0, which shows that the individual strongly supports the Democrats, to 6, which shows that the individual strongly supports the Republicans. The values 1 to 2 represent an individual having moderate support and slightly leaning towards the Democrats respectively. 
+The data file consists of five-hundred and sixty-five columns. This paper uses four of these to account for the age, family income, political party affiliation and politican views variables. The data political party affiliation exists on a spectrum, with values ranging from 0, which shows that the individual strongly supports the Democrats, to 6, which shows that the individual strongly supports the Republicans. The values 1 to 2 represent an individual having moderate support and slightly leaning towards the Democrats respectively. Values 2 and 4 represent individuals that lean slightly towards Democrats and Republicans. The value of 3 represents individuals that do not lean towards either of these two major parties at all. Values 5 and 6 represent an individual being mildly penchant towards the Republicans and being strong Republican supporters respectively. 
+
+There were a total of 146 null values for the column which represented an individuals party affiliations. These rows were omitted.
 
 ## Results
 
+``` {r, echo=FALSE, warning=FALSE}
+ggplot(data = relevant_data_categories, aes(x = partyid)) +
+    geom_bar()+
+  theme_classic()
+
+```
 # References
 
 ```{r, echo=FALSE, warning=FALSE}

@@ -1,11 +1,13 @@
 library(haven)
 library(tidyverse)
+library(ggplot2)
 raw_data <- read_dta("inputs/data/gss2021.dta")
 relevant_data <-
   raw_data %>%
   select(
     age,
     income,
+    educ,
     partyid,
     polviews
   )
@@ -21,4 +23,5 @@ relevant_data_categories <-
     partyid == 6 ~ "Republican",
     
   ))
-View(relevant_data_categories)
+
+relevant_data %>% count(income)
