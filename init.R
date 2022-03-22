@@ -1,4 +1,3 @@
-install.packages("ggiraphExtra")
 install.packages("haven")
 install.packages("tidyverse")
 install.packages("ggplot2")
@@ -41,4 +40,4 @@ relevant_data_categories <-
   ))
 relevant_data %>% count(income)
 
-toBibtex(citation("ggiraph"))
+

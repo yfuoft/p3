@@ -10,7 +10,6 @@ output: pdf_document
 knitr::opts_chunk$set(echo = TRUE)
 library(haven)
 library(tidyverse)
-library(ggiraphExtra)
 raw_data <- read_dta("inputs/data/gss2021.dta")
 relevant_data <-
   raw_data %>%
@@ -158,15 +157,31 @@ ggplot(data = relevant_data, aes(x= educ, y = polviews))+
 ```
 Years of formal education and political views do not have a statistically significant relationship.
 
-### Do socio-economic factors cumulatively impact political party affiliations?
+### Cumulative Impact of Socio-Economic Characteristics on Political Party Affiliations
 ```{r, echo=FALSE, warning=FALSE}
 
 cumaffil <- lm(formula = partyid ~ income + educ, data = relevant_data)
+ggplot(data = cumaffil, aes(x = .fitted, y = .resid)) +
+  geom_jitter()+
+  xlab("Fitted Values")+
+  ylab("Residuals")+
+  theme_minimal()
+```
+As one can easily deduce from our previous findings, since neither years of formal schooling nor household income range had any statistically significant relationship with political party affiliations, they do not have such a relationship with political party affiliations cumulatively either.
+
+
+### Cumulative Impact of Socio-Economic Characteristics on Political Views
+```{r, echo=FALSE, warning=FALSE}
+cumviews <- lm(formula = partyid ~ income + educ, data = relevant_data)
+ggplot(data = cumviews, aes(x = .fitted, y = .resid)) +
+  geom_jitter()+
+  xlab("Fitted Values")+
+  ylab("Residuals")
+
 
 ```
+The cumulative relationship of years of formal schooling and household income ranges do not have a statistically significant relationship either.
 
-
-### Do socio-economic factors cumulatively impact political views?
 
 # Discussion
 
