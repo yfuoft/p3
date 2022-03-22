@@ -83,7 +83,16 @@ Similar to political party affiliations, the political views of respondents are 
 
 There were a total of 146 null values for the column which represented an individuals party affiliations. These rows were omitted.
 
+
+
+\newpage
+
+
+
 ## Results
+
+
+
 Lets take a look at the how respondents answered when asked about their political party affiliations.
 ``` {r, echo=FALSE, warning=FALSE}
 ggplot(data = relevant_data, aes(x = partyid), fill = partyid) +
@@ -95,7 +104,8 @@ ggplot(data = relevant_data, aes(x = partyid), fill = partyid) +
   
 
 ```
-To make this simpler for analysis, lets use the categories described in the previous subsection to replot this.
+\newpage
+To make this simpler for analysis, lets use the categories described in the previous subsection to re-plot this.
 ``` {r, echo=FALSE, warning=FALSE}
 ggplot(data = relevant_data_categories, aes(x = partyid), fill = partyid) +
     geom_bar()+
@@ -107,6 +117,7 @@ ggplot(data = relevant_data_categories, aes(x = partyid), fill = partyid) +
 
 ```
 Since this recreation shows the cumulative number of respondents that identified with multiple levels of support for either parties in each category, the total number is much higher.
+\newpage
 
 ## Can Simple Linear Models be created?
 
@@ -128,6 +139,7 @@ ggplot(data = relevant_data, aes(x= income, y = partyid))+
   theme_minimal()
 ```
 A statistically insignificant relationship exists between income range and political party affiliation.
+\newpage
 ### A Simple Linear Model between Level of Education and Political Party Affiliation
 
 ```{r, echo=FALSE, warning=FALSE}
@@ -145,7 +157,7 @@ ggplot(data = relevant_data, aes(x= educ, y = partyid))+
 ```
 
 A statistically insignificant relationship exists between level of education and political party affiliation. There is a very marginal correlation between more years of education and positive support for the Democrats.
-
+\newpage
 
 ### A Simple Linear Model between Income Range and Political Views
 
@@ -162,7 +174,7 @@ ggplot(data = relevant_data, aes(x= income, y = polviews))+
   theme_minimal()
 ```
 Income range and political views do not have a statistically significant relationship.
-
+\newpage
 
 ### A Simple Linear Model between Years of Education and Political Views
 
@@ -180,6 +192,8 @@ ggplot(data = relevant_data, aes(x= educ, y = polviews))+
  theme_minimal()
 ```
 Years of formal education and political views do not have a statistically significant relationship.
+\newpage
+
 
 ### Cumulative Impact of Socio-Economic Characteristics on Political Party Affiliations
 ```{r, echo=FALSE, warning=FALSE}
@@ -191,7 +205,11 @@ ggplot(data = cumaffil, aes(x = .fitted, y = .resid)) +
   ylab("Residuals")+
   theme_minimal()
 ```
+
+
 As one can easily deduce from our previous findings, since neither years of formal schooling nor household income range had any statistically significant relationship with political party affiliations, they do not have such a relationship with political party affiliations cumulatively either.
+
+\newpage
 
 
 ### Cumulative Impact of Socio-Economic Characteristics on Political Views
@@ -208,8 +226,10 @@ ggplot(data = cumviews, aes(x = .fitted, y = .resid)) +
 ```
 The cumulative relationship of years of formal schooling and household income ranges do not have a statistically significant relationship either.
 
-
+\newpage
 # Discussion
+
+
 ## The General Social Survey 2021
 
 ### Strengths
@@ -220,11 +240,22 @@ The primary strength of the General Social Survey 2021 is the sheer amount of va
 Assigning numeric values to categorical data is very poorly done. There is a severe lack of consistency when a value is being determined to represent neutrality or strong opinions or affiliations towards one side. For instance, complete neutrality for political party affiliations is represent by an integer value of 3, but for political views by an integer value of 4. This makes it harder to perform cumulative computations. A vastly superior approach would be assigning a completely neutral stance a value of 0. This would have made the data very easy to analyze and perform complex computations on. Then, the distance from this value can be used to compute the numbers and intensity of deviations from it. Due to this, multiple linear regression could be only at a very elementary level, as many more levels of data preparation would be required.
 
 Additional data should have also been gathered, such as whether repondents' political views and socioeconomic conditions have changed in the last five years, whether they have become more interested in politics in the last five years and what is their primary source of getting information about politics. This is all covered by the supplementary survey in the appendix.
+
+
+
+
 ## Characteristics of an American Ideologue: Revisiting a Linear Relationship
 ### What makes this paper unique?
 The uniqueness of this paper can be attributed primarily to one important deduction made; how the lines between socio-economic characteristics and political party affiliations and political views in America have blurred significantly since academics and statisticians revisited this topic last. It paves the way for further analyses and discourse regarding what significant changes in both societal opinion, the media for political communication, party policies and the way political popularity is achieved has occurred very recently.
+
+
 ### Shortcomings
+
+
 While this paper demonstrated that the relationship between certain socio-economic characteristics and political views and party affiliations is now non-existent, it does not give any reasons for it. This is a topic that needs to be revisted in order to demonstrate causality. The supplementary survey (link in the Appendix) collects additional data to make better statistical inferences on what caused this change. Furthermore, due to important relevant data missing from the General Social Survey 2021 that the supplementary survey asks for, this paper does not go beyond making very rudimentary computations.
+\newpage
+
+
 # Bibliography
 
 ```{r, echo=FALSE, warning=FALSE}
@@ -232,10 +263,18 @@ df2 <- "references.bib" %>%
   RefManageR::ReadBib() 
 df2
 ```
+\newpage
+
+
 # Appendix
 
 ## Supplementary Survey
+
+
+
 Link: "<https://kq8fy5oqcd5.typeform.com/to/YCtp0F0N>"
+
+
 ## Git Repository
 
 Github: "<https://github.com/yfuoft/p3.git>"
