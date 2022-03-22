@@ -217,9 +217,12 @@ The primary strength of the General Social Survey 2021 is the sheer amount of va
 
 ### Shortcomings
 
-Assigning numeric values to categorical data is very poorly done. There is a severe lack of consistency when a value is being determined to represent neutrality or strong opinions or affiliations towards one side. For instance, complete neutrality for political party affiliations is represent by an integer value of 3, but for political views by an integer value of 4. This makes it harder to perform cumulative computations. A vastly superior approach would be assigning a completely neutral stance a value of 0. This would have made the data very easy to analyze and perform complex computations on. Then, the distance from this value can be used to compute the numbers and intensity of deviations from it. Due to this, multiple linear regression could be only at a very elementary level, as many more levels of data preperation would be required.
-
-## What makes this paper
+Assigning numeric values to categorical data is very poorly done. There is a severe lack of consistency when a value is being determined to represent neutrality or strong opinions or affiliations towards one side. For instance, complete neutrality for political party affiliations is represent by an integer value of 3, but for political views by an integer value of 4. This makes it harder to perform cumulative computations. A vastly superior approach would be assigning a completely neutral stance a value of 0. This would have made the data very easy to analyze and perform complex computations on. Then, the distance from this value can be used to compute the numbers and intensity of deviations from it. Due to this, multiple linear regression could be only at a very elementary level, as many more levels of data preparation would be required.
+## Characteristics of an American Ideologue: Revisiting a Linear Relationship
+### What makes this paper unique?
+The uniqueness of this paper can be attributed primarily to one important deduction made; how the lines between socio-economic characteristics and political party affiliations and political views in America have blurred significantly since academics and statisticians revisited this topic last. It paves the way for further analyses and discourse regarding what significant changes in both societal opinion, the media for political communication, party policies and the way political popularity is achieved has occurred very recently.
+### Shortcomings
+While this paper demonstrated that the relationship between certain socio-economic characteristics and political views and party affiliations is now non-existent, it does not give any reasons for it. This is a topic that needs to be revisted in order to demonstrate causality.
 # Bibliography
 
 ```{r, echo=FALSE, warning=FALSE}
