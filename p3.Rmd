@@ -50,14 +50,14 @@ relevant_data_categories <-
 \begin{centering}
 {\bf Abstract}
 \\
-The American General Social Survey 2021 sheds light on various societal benchmarks. This paper extrapolates on this data and demonstrates that anything close to a linear model cannot be formed between age, family income, level of educational attainment, political party affiliations and political views, providing a more focused yet holistic view on American political opinion. Some academic literature has established that a nigh-linear relationship is sufficiently accurate to make predictions about how individuals with certain characteristics are likely to vote. This paper uses this data to demonstrate otherwise. It revisits this phenomenon and refutes it entirely. 
+The American General Social Survey 2021 sheds light on various societal benchmarks. This paper extrapolates on this data and demonstrates that anything close to a linear model cannot be formed between age, family income, level of educational attainment, political party affiliations and political views, providing a more focused yet holistic view on American political opinion. Some academic literature has established that a nigh-linear relationship is sufficiently accurate to make predictions about how individuals with certain characteristics are likely to vote. This paper uses this data to demonstrate otherwise. It revisits this phenomenon and refutes it entirely. It shows how a few selected socio-economic characteristics do not have a linear relationship with political party affliations or political views that is statistically significant, both individually and cumulatively. While a plethora of factors including but not limited to different forms of media and changes in educational curriculum may exist, this paper leaves these reasons up to speculation. However its findings strongly contrast scholarly literature on this topic which dates to a few decades ago to even a few years ago.
 \end{centering}
 ```
 # Introduction
 
 
-The R language [@R-base] is used, in addition to a variety of packages and scholarly sources. Please refer to the References section or the "references.bib" file in the Git repository for more information.
-The relationship between economic and social classes with political views and party leanings has drawn the attention of many academics, statisticians and political scientists and commentators. Many have tried to claim that a linear relationship between the factors that define economic and social classes and political leanings and views exists (Dupont & Bateman, 2012; Burris, 1987). This paper will test whether this phenomenon still holds true. As statisticians, trends are important. However, trends regarding social behaviour should be revisited frequently as societal opinion, economic conditions and contemporary problems change.
+The R language [@R-base] is used, in addition to a variety of packages and scholarly sources. Please refer to the Bibliography section or the "references.bib" file in the Git repository for more information.
+The relationship between economic and social classes with political views and party leanings has drawn the attention of many academics, statisticians and political scientists and commentators. Many have tried to claim that a linear relationship between the factors that define economic and social classes and political leanings and views exists (Dupont & Bateman, 2012; Burris, 1987). This paper will test whether this phenomenon still holds true. To statisticians, trends are very important. However, trends regarding social behaviour should be revisited frequently as societal opinion, economic conditions and contemporary problems change.
 
 
 
@@ -75,7 +75,7 @@ The data file consists of five-hundred and sixty-five columns. This paper uses f
 
 In the dataset political party affiliation exists on a spectrum, with values ranging from 0, which shows that the individual strongly supports the Democrats, to 6, which shows that the individual strongly supports the Republicans. The values 1 to 2 represent an individual having moderate support and slightly leaning towards the Democrats respectively. Values 2 and 4 represent individuals that lean slightly towards Democrats and Republicans. The value of 3 represents individuals that do not lean towards either of these two major parties at all. Values 5 and 6 represent an individual being mildly penchant towards the Republicans and being strong Republican supporters respectively. 
 
-Furthermore, income is input by a respondent based on multiple ranges. For this reason, we will treat income range as categorical data. This variable represents household income.
+Furthermore, income is input by a respondent based on multiple ranges. For this reason, we will treat income range as categorical data. This variable represents household income. These household income ranges start from under \$1000, represented by the integer values of 1,  to \$25,000, represented by the integer value of 12. There are ten incomes ranges inbetween, each with a \$1,999 increment. A refusal to answer is represented by 13.
 
 Education level ranges in years from 0, representing no formal education to 17, which represents five years of college education or higher.
 
@@ -88,7 +88,7 @@ Lets take a look at the how respondents answered when asked about their politica
 ``` {r, echo=FALSE, warning=FALSE}
 ggplot(data = relevant_data, aes(x = partyid), fill = partyid) +
     geom_bar()+
-  ggtitle("Levels of Predesposition towards the Democratic and Republic Parties")+
+  ggtitle("Levels of Predesposition towards the Democratic and Republican Parties")+
   xlab("Level of support for each major party.")+
   ylab("Number of people that fall into each category.")
     
@@ -99,7 +99,7 @@ To make this simpler for analysis, lets use the categories described in the prev
 ``` {r, echo=FALSE, warning=FALSE}
 ggplot(data = relevant_data_categories, aes(x = partyid), fill = partyid) +
     geom_bar()+
-  ggtitle("Levels of Predesposition towards the Democratic and Republic Parties")+
+  ggtitle("Levels of Predesposition towards the Democratic and Republican Parties")+
   xlab("Level of support for each major party.")+
   ylab("Number of people that fall into each category.")
     
@@ -119,7 +119,13 @@ simpleincomeaffiliationfit <- lm(formula = income ~ partyid, data = relevant_dat
 
 ggplot(data = relevant_data, aes(x= income, y = partyid))+
   geom_point()+
-  geom_smooth(method="lm")
+  geom_smooth(method="lm")+
+      xlab("Household Income Ranges")+
+  ylab("Political Party Affiliations")+
+  labs( 
+    caption = "3 is neutral.
+    The higher or lower the value if from 3, the stronger is the support for the Republicans or Democrats respectively.") +
+  theme_minimal()
 ```
 A statistically insignificant relationship exists between income range and political party affiliation.
 ### A Simple Linear Model between Level of Education and Political Party Affiliation
@@ -129,7 +135,13 @@ simpleeducaffiliationfit <- lm(formula = income ~ partyid, data = relevant_data)
 #summary(simpleeducaffiliationfit)
 ggplot(data = relevant_data, aes(x= educ, y = partyid))+
   geom_point()+
-  geom_smooth(method="lm")
+  geom_smooth(method="lm")+
+      xlab("Years of Formal Schooling")+
+  ylab("Political Party Affiliations ")+
+  labs( 
+    caption = "3 is neutral.
+    The higher or lower the value if from 3, the stronger is the support for the Republicans or Democrats respectively.") +
+  theme_minimal()
 ```
 
 A statistically insignificant relationship exists between level of education and political party affiliation. There is a very marginal correlation between more years of education and positive support for the Democrats.
@@ -138,10 +150,16 @@ A statistically insignificant relationship exists between level of education and
 ### A Simple Linear Model between Income Range and Political Views
 
 ```{r, echo=FALSE, warning=FALSE}
-
 ggplot(data = relevant_data, aes(x= income, y = polviews))+
   geom_point()+
-  geom_smooth(method="lm")
+  geom_smooth(method="lm")+
+    xlab("Household Income Ranges")+
+  ylab("Political Views ")+
+  labs( 
+    caption = "4 is neutral.
+    The higher or lower the value if from 4, the stronger they identify as Liberal or Conservative respectively.",)+
+
+  theme_minimal()
 ```
 Income range and political views do not have a statistically significant relationship.
 
@@ -153,7 +171,13 @@ Income range and political views do not have a statistically significant relatio
 
 ggplot(data = relevant_data, aes(x= educ, y = polviews))+
   geom_point()+
-  geom_smooth(method="lm")
+  geom_smooth(method="lm")+
+  xlab("Years of Formal Schooling")+
+  ylab("Political Views ")+
+  labs( 
+    caption = "4 is neutral.
+    The higher or lower the value if from 4, the stronger they identify as Liberal or Conservative respectively.",) +
+ theme_minimal()
 ```
 Years of formal education and political views do not have a statistically significant relationship.
 
@@ -176,7 +200,9 @@ cumviews <- lm(formula = partyid ~ income + educ, data = relevant_data)
 ggplot(data = cumviews, aes(x = .fitted, y = .resid)) +
   geom_jitter()+
   xlab("Fitted Values")+
-  ylab("Residuals")
+  ylab("Residuals")+
+  theme_minimal()
+
 
 
 ```
@@ -184,8 +210,16 @@ The cumulative relationship of years of formal schooling and household income ra
 
 
 # Discussion
+## The General Social Survey 2021
 
-# References
+### Strengths
+The primary strength of the General Social Survey 2021 is the sheer amount of variables used to give a very holistic perspective on American societal opinions and characteristics. This allows statisticians to observe if any trends exist, make predictions and test the different relationships that various characteristics have with various political opinions and leanings.
+
+### Shortcomings
+
+
+
+# Bibliography
 
 ```{r, echo=FALSE, warning=FALSE}
 df2 <- "references.bib" %>%
