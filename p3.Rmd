@@ -10,6 +10,28 @@ output: pdf_document
 knitr::opts_chunk$set(echo = TRUE)
 library(haven)
 library(tidyverse)
+raw_data <- read_dta("inputs/data/gss2021.dta")
+relevant_data <-
+  raw_data %>%
+  select(
+    age,
+    income,
+    educ,
+    partyid,
+    polviews
+  )
+relevant_data_categories <-
+  relevant_data %>%
+  mutate(partyid = case_when( 
+    partyid == 0 ~ "Democrat",
+    partyid == 1 ~ "Democrat",
+    partyid == 2 ~ "Independent",
+    partyid == 3 ~ "Independent",
+    partyid == 4 ~ "Independent",
+    partyid == 5 ~ "Republican",
+    partyid == 6 ~ "Republican",
+    
+  ))
 ```
 
 ```{=tex}
@@ -23,7 +45,7 @@ The American General Social Survey 2021 sheds light on various societal benchmar
 
 
 The R language [@R-base] is used, in addition to a variety of packages and scholarly sources. Please refer to the References section or the "references.bib" file in the Git repository for more information.
-The relationship between economic and social classes with political views and party leanings has drawn the attention of many academics, statisticians and political scientists and commentators. Many have tried to claim that a linear relationship between the factors that define economic and social classes and political leanings and views exists (Dupont & Bateman, 2012; Burris, 1987). This paper will refute this, and leave the reason for why statistical data would be weaponized in this manner up to speculation. As statisticians, trends are important. However creating trends that do not exist or trends that are intentionally based off of unauthentic data is very concerning.
+The relationship between economic and social classes with political views and party leanings has drawn the attention of many academics, statisticians and political scientists and commentators. Many have tried to claim that a linear relationship between the factors that define economic and social classes and political leanings and views exists (Dupont & Bateman, 2012; Burris, 1987). This paper will refute this. As statisticians, trends are important. However, trends regarding social behaviour should be revisited frequently as societal opinion, economic conditions and contemporary problems change.
 
 
 
@@ -33,6 +55,8 @@ The relationship between economic and social classes with political views and pa
 ## How it was obtained
 
 The entirety of the data used as input in this paper was obtained through the American General Social Survey 2021. The data is free to use for academic purposes. It was saved as a Stata file in the data subdirectory of the inputs folder, along with ancillary documents regarding how to read it.
+
+
 ## Cleaning the data
 
 The data file consists of five-hundred and sixty-five columns. This paper uses four of these to account for the age, family income, political party affiliation and politican views variables. The data political party affiliation exists on a spectrum, with values ranging from 0, which shows that the individual strongly supports the Democrats, to 6, which shows that the individual strongly supports the Republicans. The values 1 to 2 represent an individual having moderate support and slightly leaning towards the Democrats respectively. Values 2 and 4 represent individuals that lean slightly towards Democrats and Republicans. The value of 3 represents individuals that do not lean towards either of these two major parties at all. Values 5 and 6 represent an individual being mildly penchant towards the Republicans and being strong Republican supporters respectively. 
@@ -40,13 +64,34 @@ The data file consists of five-hundred and sixty-five columns. This paper uses f
 There were a total of 146 null values for the column which represented an individuals party affiliations. These rows were omitted.
 
 ## Results
-
+Lets take a look at the how respondents answered when asked about their political party affiliations.
 ``` {r, echo=FALSE, warning=FALSE}
-ggplot(data = relevant_data_categories, aes(x = partyid)) +
+ggplot(data = relevant_data, aes(x = partyid), fill = partyid) +
     geom_bar()+
-  theme_classic()
+  ggtitle("Levels of Predesposition towards the Democratic and Republic Parties")+
+  xlab("Level of support for each major party.")+
+  ylab("Number of people that fall into each category.")
+    
+  
 
 ```
+To make this simpler for analysis, lets use the categories described in the previous subsection to replot this.
+``` {r, echo=FALSE, warning=FALSE}
+ggplot(data = relevant_data_categories, aes(x = partyid), fill = partyid) +
+    geom_bar()+
+  ggtitle("Levels of Predesposition towards the Democratic and Republic Parties")+
+  xlab("Level of support for each major party.")+
+  ylab("Number of people that fall into each category.")
+    
+  
+
+```
+Since this recreation shows the cumulative number of respondents that identified with multiple levels of support for either parties in each category, the total number is much higher.
+
+### A Simple Linear Model between Income and Party Affliation
+
+
+
 # References
 
 ```{r, echo=FALSE, warning=FALSE}
